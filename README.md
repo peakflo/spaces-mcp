@@ -16,7 +16,7 @@ This repository contains no server code. It only holds the connection configs fo
 | Client | How |
 |---|---|
 | Claude (claude.ai / Desktop) | Settings → Connectors → **Add custom connector** → `https://api.peakflo.ai/mcp` |
-| Claude Code | `claude mcp add --transport http peakflo https://api.peakflo.ai/mcp` |
+| Claude Code | `claude mcp add --transport http peakflo https://api.peakflo.ai/mcp` — or as a plugin: `/plugin install peakflo-spaces --marketplace peakflo/spaces-mcp` |
 | ChatGPT | Settings → Apps → Developer mode → **Create app** → `https://api.peakflo.ai/mcp` |
 | Gemini app | gemini.google.com → Settings → Connected Apps → Custom apps → **Add a custom app** (US, personal accounts) |
 | Gemini CLI | `gemini extensions install https://github.com/peakflo/spaces-mcp` |

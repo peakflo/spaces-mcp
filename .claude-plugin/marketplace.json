@@ -1,0 +1,14 @@
+{
+  "name": "peakflo",
+  "owner": { "name": "Peakflo", "email": "support@peakflo.co" },
+  "plugins": [
+    {
+      "name": "peakflo-spaces",
+      "source": "./",
+      "description": "Hand off repetitive finance and ops work to cloud agents or people.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "homepage": "https://spaces.peakflo.ai/docs/mcp/"
+    }
+  ]
+}
