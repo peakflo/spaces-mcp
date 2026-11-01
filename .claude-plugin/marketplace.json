@@ -1,6 +1,12 @@
 {
   "name": "peakflo",
-  "owner": { "name": "Peakflo", "email": "support@peakflo.co" },
+  "owner": {
+    "name": "Peakflo",
+    "email": "support@peakflo.co"
+  },
+  "metadata": {
+    "description": "Peakflo plugins for Claude Code: Spaces by Peakflo hosted MCP server."
+  },
   "plugins": [
     {
       "name": "peakflo-spaces",
