@@ -1,0 +1,11 @@
+{
+  "name": "peakflo-spaces",
+  "description": "Hand off repetitive finance and ops work to cloud agents or people. Hosted MCP server with OAuth sign-in.",
+  "version": "1.0.0",
+  "author": { "name": "Peakflo", "email": "support@peakflo.co" },
+  "homepage": "https://spaces.peakflo.ai/docs/mcp/",
+  "repository": "https://github.com/peakflo/spaces-mcp",
+  "license": "MIT",
+  "keywords": ["finance", "operations", "automation", "tasks", "workflows", "mcp"],
+  "logo": "assets/logo.svg"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "peakflo-spaces",
+  "description": "Hand off repetitive finance and ops work to cloud agents or people.",
+  "version": "1.0.0",
+  "author": { "name": "Peakflo", "url": "https://spaces.peakflo.ai" },
+  "homepage": "https://spaces.peakflo.ai/docs/mcp/",
+  "repository": "https://github.com/peakflo/spaces-mcp",
+  "license": "MIT",
+  "mcpServers": {
+    "peakflo": { "type": "http", "url": "https://api.peakflo.ai/mcp" }
+  }
+}

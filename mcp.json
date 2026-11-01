@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "peakflo": {
+      "url": "https://api.peakflo.ai/mcp"
+    }
+  }
+}

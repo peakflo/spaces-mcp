@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="32 44 464 464" role="img" aria-label="Spaces">
+  <defs><clipPath id="square"><rect x="216" y="96" width="280" height="280"/></clipPath></defs>
+  <rect x="216" y="96" width="280" height="280" fill="#1746A2"/>
+  <circle cx="184" cy="304" r="152" fill="#F02A1D"/>
+  <circle cx="184" cy="304" r="152" fill="#101010" clip-path="url(#square)"/>
+</svg>

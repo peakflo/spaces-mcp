@@ -1,0 +1,11 @@
+{
+  "name": "peakflo-spaces",
+  "version": "1.0.0",
+  "description": "Hand off repetitive finance and ops work to cloud agents or people.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "peakflo": {
+      "httpUrl": "https://api.peakflo.ai/mcp"
+    }
+  }
+}
