@@ -1,0 +1,44 @@
+name: Publish to the official MCP Registry
+
+# Publishes server.json as ai.peakflo/spaces. The namespace is proven with the
+# DNS TXT record on peakflo.ai ("v=MCPv1; k=ed25519; p=...") and the matching
+# private key in the MCP_REGISTRY_DNS_PRIVATE_KEY secret.
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the DNS proof record
+        run: |
+          if ! dig +short TXT peakflo.ai | grep -q 'v=MCPv1; k=ed25519'; then
+            echo "::error::TXT record 'v=MCPv1; k=ed25519; p=...' not found on peakflo.ai yet"
+            exit 1
+          fi
+
+      - name: Install mcp-publisher
+        run: |
+          curl -sL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher --help >/dev/null
+
+      - name: Validate
+        run: ./mcp-publisher validate
+
+      - name: Log in with DNS proof
+        env:
+          PRIVATE_KEY: ${{ secrets.MCP_REGISTRY_DNS_PRIVATE_KEY }}
+        run: ./mcp-publisher login dns --domain peakflo.ai --private-key "$PRIVATE_KEY"
+
+      - name: Publish
+        run: ./mcp-publisher publish
+
+      - name: Confirm
+        run: curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=ai.peakflo" | head -c 2000
