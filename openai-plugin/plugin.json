@@ -40,7 +40,7 @@
         "termsOfServiceURL": "https://help.peakflo.co/terms-and-conditions",
         "defaultPrompt": [
           "Every Monday at 9am, have finance send me the AR ageing summary.",
-          "Using my bills table, show unpaid and overdue bills by vendor.",
+          "Show unpaid and overdue bills by vendor.",
           "What does our expense policy say about client dinners?"
         ],
         "brandColor": "#1746A2",
@@ -66,16 +66,16 @@
               "expected_behavior": "Creates a one-off task that goes to triage, returns the task link, and says it is queued."
             },
             {
-              "description": "Analyse payables from workspace data",
-              "prompt": "Using my bills table, show unpaid and overdue bills by vendor.",
-              "tools_triggered": "table_list, table_schema, table_sql",
-              "expected_behavior": "Reads the bills and vendors data tables with read-only SQL (not the AP report views) and returns the count and total of unpaid and overdue bills per vendor, largest first."
+              "description": "Payables by vendor from standard AP reports",
+              "prompt": "Show unpaid and overdue bills by vendor.",
+              "tools_triggered": "report_schema, report_schema_detail, report_query",
+              "expected_behavior": "Queries the billing_overview report and returns the unpaid and overdue amounts per vendor, largest first."
             },
             {
               "description": "Find duplicate bills",
               "prompt": "Which bills look like duplicates?",
-              "tools_triggered": "table_sql",
-              "expected_behavior": "Identifies the two bills with invoice number INV-55555 from vendor V003 (Cedar IT Services), each SGD 4,280, as likely duplicates, without changing any data."
+              "tools_triggered": "report_query",
+              "expected_behavior": "Lists bills by number, vendor and amount from the billing_overview report and identifies the two INV-55555 bills from Cedar IT Services, each SGD 4,280, as likely duplicates, without changing data."
             },
             {
               "description": "Answer from company policy documents",
