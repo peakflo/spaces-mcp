@@ -11,7 +11,14 @@
   "homepage": "https://spaces.peakflo.ai/docs/mcp/",
   "repository": "https://github.com/peakflo/spaces-mcp",
   "license": "MIT",
-  "keywords": ["finance", "operations", "tasks", "automation", "workflows", "reports"],
+  "keywords": [
+    "finance",
+    "operations",
+    "tasks",
+    "automation",
+    "workflows",
+    "reports"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
@@ -33,7 +40,7 @@
         "termsOfServiceURL": "https://help.peakflo.co/terms-and-conditions",
         "defaultPrompt": [
           "Every Monday at 9am, have finance send me the AR ageing summary.",
-          "Show unpaid and overdue bills by vendor this quarter.",
+          "Show unpaid and overdue bills by vendor.",
           "What does our expense policy say about client dinners?"
         ],
         "brandColor": "#1746A2",
@@ -60,9 +67,9 @@
             },
             {
               "description": "Analyse payables from workspace data",
-              "prompt": "Show unpaid and overdue bills by vendor this quarter.",
+              "prompt": "Show unpaid and overdue bills by vendor.",
               "tools_triggered": "table_list, table_schema, table_sql",
-              "expected_behavior": "Reads the bills and vendors tables with read-only SQL and returns totals of unpaid and overdue bills per vendor for the current quarter."
+              "expected_behavior": "Reads the bills and vendors tables with read-only SQL and returns the count and total of unpaid and overdue bills per vendor, largest first."
             },
             {
               "description": "Find duplicate bills",
