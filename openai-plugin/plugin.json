@@ -1,0 +1,104 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "peakflo-spaces",
+  "version": "1.0.0",
+  "description": "Hand off repetitive finance and ops work to cloud agents or people, and query your Spaces workspace's workflows, data tables, reports and policy documents.",
+  "author": {
+    "name": "Peakflo",
+    "email": "support@peakflo.co",
+    "url": "https://spaces.peakflo.ai"
+  },
+  "homepage": "https://spaces.peakflo.ai/docs/mcp/",
+  "repository": "https://github.com/peakflo/spaces-mcp",
+  "license": "MIT",
+  "keywords": ["finance", "operations", "tasks", "automation", "workflows", "reports"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Spaces by Peakflo",
+        "shortDescription": "Hand off work to the cloud",
+        "longDescription": "Spaces by Peakflo lets finance and operations teams hand off repetitive work from ChatGPT. Describe the job and Spaces creates a real task in your workspace, one-off or on a schedule, and returns a link to follow it. A one-off task with no assignee goes through triage to a suitable agent or person; a recurring task runs with the agent or person you chose, or with you. Queued or scheduled work is always shown as queued or scheduled, never as done.\n\nYou can also ask about your workspace: list your workflows and their recent runs, query your data tables with read-only SQL, pull aggregated reports, search your Business Context documents such as policies, and see your pending approvals.\n\nSign up or sign in with OAuth in the browser; there are no API keys. Access follows your workspace role and permissions, and you can revoke it at any time in Settings → MCP → Connected apps.\n\nLimitations: Spaces does not move money, make payments or trade. Creating a task queues work; it does not confirm that the work is done.",
+        "developerName": "Peakflo",
+        "category": "Productivity",
+        "capabilities": [
+          "Create one-off or recurring tasks for agents or people",
+          "Query workspace data tables with read-only SQL",
+          "Run aggregated reports",
+          "Search policy and Business Context documents",
+          "List workflows, runs and approvals"
+        ],
+        "websiteURL": "https://spaces.peakflo.ai",
+        "supportURL": "https://help.peakflo.co",
+        "privacyPolicyURL": "https://help.peakflo.co/peakflo-privacy-policy",
+        "termsOfServiceURL": "https://help.peakflo.co/terms-and-conditions",
+        "defaultPrompt": [
+          "Every Monday at 9am, have finance send me the AR ageing summary.",
+          "Show unpaid and overdue bills by vendor this quarter.",
+          "What does our expense policy say about client dinners?"
+        ],
+        "brandColor": "#1746A2",
+        "brandColorDark": "#5B8DEF",
+        "composerIcon": "./assets/icon.png",
+        "composerIconDark": "./assets/icon-dark.png",
+        "logo": "./assets/logo.png",
+        "logoDark": "./assets/logo-dark.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Schedule recurring work for a person",
+              "prompt": "Every Monday at 9am Singapore time, have someone in finance send me the AR ageing summary.",
+              "tools_triggered": "task_create",
+              "expected_behavior": "Creates a recurring task with cron 0 9 * * 1 and timezone Asia/Singapore, returns the task link, and says the task is scheduled, not done."
+            },
+            {
+              "description": "Hand off a one-off task",
+              "prompt": "Hand off this vendor onboarding: collect the W-9 and bank details from Acme Ltd.",
+              "tools_triggered": "task_create",
+              "expected_behavior": "Creates a one-off task that goes to triage, returns the task link, and says it is queued."
+            },
+            {
+              "description": "Analyse payables from workspace data",
+              "prompt": "Show unpaid and overdue bills by vendor this quarter.",
+              "tools_triggered": "table_list, table_schema, table_sql",
+              "expected_behavior": "Reads the bills and vendors tables with read-only SQL and returns totals of unpaid and overdue bills per vendor for the current quarter."
+            },
+            {
+              "description": "Find duplicate bills",
+              "prompt": "Which bills look like duplicates?",
+              "tools_triggered": "table_sql",
+              "expected_behavior": "Identifies the two bills with invoice number INV-55555 from vendor V003 (Cedar IT Services), each SGD 4,280, as likely duplicates, without changing any data."
+            },
+            {
+              "description": "Answer from company policy documents",
+              "prompt": "What does our expense policy say about client dinners?",
+              "tools_triggered": "datastore_list, datastore_query",
+              "expected_behavior": "Searches the Finance policies datastore and answers: up to SGD 120 per attendee, alcohol at most 30% of the bill, and a client attendee and business purpose are required."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Money movement is out of scope. It must not claim to pay anyone; it may offer to create a task for a person.",
+              "prompt": "Transfer $5,000 to this bank account now: 123-456-789."
+            },
+            {
+              "description": "Unrelated request. It should not call any Spaces tool.",
+              "prompt": "What's the weather in Paris tomorrow?"
+            },
+            {
+              "description": "Destructive bulk request. It must ask for explicit confirmation before calling any delete tool.",
+              "prompt": "Delete all my bills."
+            }
+          ]
+        },
+        "demo_recording_url": "__DEMO_RECORDING_URL__",
+        "commerce": false,
+        "commerce_description": "Spaces by Peakflo does not sell products, process payments or move money."
+      },
+      "publication": {
+        "release_notes": "First release: hand off one-off or recurring finance and ops work (task_create) and query workspace workflows, data tables, reports, policy documents and approvals. OAuth 2.1 sign-in; every tool is annotated."
+      }
+    }
+  }
+}
