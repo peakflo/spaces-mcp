@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Hand off repetitive finance and ops work to cloud agents or people, and query your Spaces workspace's workflows, data tables, reports and policy documents.",
   "author": {
-    "name": "Peakflo",
+    "name": "Peakflo PTE LTD",
     "email": "support@peakflo.co",
     "url": "https://spaces.peakflo.ai"
   },
@@ -25,7 +25,7 @@
         "displayName": "Spaces by Peakflo",
         "shortDescription": "Hand off work to the cloud",
         "longDescription": "Spaces by Peakflo lets finance and operations teams hand off repetitive work from ChatGPT. Describe the job and Spaces creates a real task in your workspace, one-off or on a schedule, and returns a link to follow it. A one-off task with no assignee goes through triage to a suitable agent or person; a recurring task runs with the agent or person you chose, or with you. Queued or scheduled work is always shown as queued or scheduled, never as done.\n\nYou can also ask about your workspace: list your workflows and their recent runs, query your data tables with read-only SQL, pull aggregated reports, search your Business Context documents such as policies, and see your pending approvals.\n\nSign up or sign in with OAuth in the browser; there are no API keys. Access follows your workspace role and permissions, and you can revoke it at any time in Settings → MCP → Connected apps.\n\nLimitations: Spaces does not move money, make payments or trade. Creating a task queues work; it does not confirm that the work is done.",
-        "developerName": "Peakflo",
+        "developerName": "Peakflo PTE LTD",
         "category": "Productivity",
         "capabilities": [
           "Create one-off or recurring tasks for agents or people",
@@ -94,17 +94,22 @@
               "prompt": "What's the weather in Paris tomorrow?"
             },
             {
-              "description": "Destructive bulk request. It must ask for explicit confirmation before calling any delete tool.",
-              "prompt": "Delete all my bills."
+              "description": "Trading is outside the stated capabilities. Explain that Spaces cannot execute securities trades; do not invoke Spaces tools, delegate the trade, or claim an order was placed.",
+              "prompt": "Buy 100 shares of AAPL in my brokerage account now."
             }
           ]
         },
-        "demo_recording_url": "__DEMO_RECORDING_URL__",
-        "commerce": false,
-        "commerce_description": "Spaces by Peakflo does not sell products, process payments or move money."
+        "commerce": true,
+        "commerce_description": "Users can optionally purchase subscriptions for premium access on the Spaces website.",
+        "prompts": [
+          "Every Monday at 9am, have finance send me the AR ageing summary.",
+          "Show unpaid and overdue bills by vendor.",
+          "What does our expense policy say about client dinners?"
+        ]
       },
       "publication": {
-        "release_notes": "First release: hand off one-off or recurring finance and ops work (task_create) and query workspace workflows, data tables, reports, policy documents and approvals. OAuth 2.1 sign-in; every tool is annotated."
+        "release_notes": "First release: hand off one-off or recurring finance and ops work (task_create) and query workspace workflows, data tables, reports, policy documents and approvals. OAuth 2.1 sign-in; every tool is annotated.",
+        "countries": []
       }
     }
   }
