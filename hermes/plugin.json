@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "peakflo-spaces",
+  "version": "1.0.0",
+  "description": "Hand off repetitive finance and ops work to cloud agents or people, and query your Spaces workspace's workflows, data tables, reports and policy documents.",
+  "author": {
+    "name": "Peakflo PTE LTD",
+    "email": "support@peakflo.co",
+    "url": "https://spaces.peakflo.ai"
+  },
+  "homepage": "https://spaces.peakflo.ai/docs/mcp/",
+  "repository": "https://github.com/peakflo/spaces-mcp",
+  "license": "MIT",
+  "keywords": ["finance", "operations", "tasks", "automation", "workflows", "reports", "mcp"],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "servers": {
+        "peakflo": {
+          "trust": "untrusted"
+        }
+      }
+    }
+  }
+}

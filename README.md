@@ -20,6 +20,7 @@ This repository contains no server code. It only holds the connection configs fo
 | ChatGPT | Settings → Apps → Developer mode → **Create app** → `https://api.peakflo.ai/mcp` |
 | Gemini app | gemini.google.com → Settings → Connected Apps → Custom apps → **Add a custom app** (US, personal accounts) |
 | Gemini CLI | `gemini extensions install https://github.com/peakflo/spaces-mcp` |
+| Hermes Agent | `hermes plugins install peakflo/spaces-mcp/hermes` (see [`hermes/`](hermes/README.md)) |
 | Cursor | Install the plugin from this repo, or add [`mcp.json`](mcp.json) to `~/.cursor/mcp.json` |
 | VS Code | `code --add-mcp '{"name":"peakflo","type":"http","url":"https://api.peakflo.ai/mcp"}'` |
 | Other | Any MCP client that supports Streamable HTTP and OAuth: use the URL above |
