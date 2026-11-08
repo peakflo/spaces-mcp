@@ -38,7 +38,7 @@ clawhub skill publish ./openclaw/peakflo-spaces \
   --name "Spaces by Peakflo" \
   --version 1.0.0 \
   --tags latest \
-  --changelog "First release: connect OpenClaw to the hosted Spaces MCP server (Streamable HTTP, OAuth 2.1), hand off one-off or recurring work with task_create, read-only workspace queries, and safety rules (confirm writes, no money movement)." \
+  --changelog "First release: connect OpenClaw to the hosted Spaces MCP server (Streamable HTTP, OAuth 2.1), hand off one-off or recurring work with task_create, read-only workspace queries, and safety rules (confirm writes and approvals; never start payments on its own)." \
   --source-repo peakflo/spaces-mcp \
   --source-commit "$(git rev-parse HEAD)" \
   --source-path openclaw/peakflo-spaces
