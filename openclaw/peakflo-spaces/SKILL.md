@@ -20,7 +20,7 @@ Server facts:
 
 ## Connect (one time)
 
-If no `peakflo` server is configured yet (`openclaw mcp show peakflo` fails), give the user these commands. They run them on the Gateway host:
+If no Spaces tools are available in this session (no `peakflo__…` tools), the `peakflo` server is not set up yet. Give the user the commands below. **The user runs them in their own terminal on the Gateway host. Don't run them yourself:** `openclaw gateway stop` would stop the Gateway that is running this session, and sign-in needs the user's browser.
 
 ```bash
 openclaw mcp add peakflo \
@@ -28,10 +28,9 @@ openclaw mcp add peakflo \
   --transport streamable-http \
   --auth oauth
 
-# Sign-in runs offline: stop the Gateway first and start it again afterwards.
-openclaw gateway stop
-openclaw mcp login peakflo
-openclaw gateway start
+# Stop the Gateway during sign-in. Sign-in still needs network access and a browser.
+# The ";" makes sure the Gateway starts again even if sign-in fails or is cancelled.
+openclaw gateway stop; openclaw mcp login peakflo; openclaw gateway start
 
 openclaw mcp doctor peakflo --probe
 ```
@@ -55,7 +54,7 @@ The same definition as config (`mcp.servers` in `openclaw.json`):
 - `openclaw mcp login peakflo` prints an authorization URL. The user opens it, signs up or signs in, picks a workspace and clicks **Allow access**. OpenClaw catches the loopback redirect and saves the credentials. If the browser cannot reach the callback, use the printed `openclaw mcp login peakflo --code <code>` command.
 - In the Control UI, a person with admin access can instead use **+ → Plugins → Add MCP server…** with the same URL, Streamable HTTP and OAuth.
 - `doctor --probe` should report the server as ok and list its tools. A warning such as "OAuth credentials are not authorized" means the login step has not finished yet.
-- OpenClaw exposes the tools as `peakflo__<tool>`, for example `peakflo__task_create`.
+- OpenClaw exposes the tools as `peakflo__<tool>`. In this skill, a bare tool name refers to that tool: `task_create` means `peakflo__task_create`, `workflow_execute` means `peakflo__workflow_execute`, and so on. The safety rules below apply to the prefixed names too.
 
 Never ask the user for a password, API key, token or authorization code in chat. Sign-in always happens in the browser.
 
@@ -66,20 +65,23 @@ Use it when the user wants something done rather than answered: "have someone…
 - `title`: short and specific.
 - `description`: clear instructions, with everything the assignee needs to do the work.
 - `schedule` (optional): `{ "cron": "0 9 * * 1", "timezone": "Asia/Singapore" }`. The timezone is an IANA name and defaults to UTC.
-- `assignee` (optional): `{ "kind": "agent" | "user", "id": "<uuid>" }`. Use only an ID returned by a Spaces tool (for example `users_list`). Never guess an ID.
+- `assignee` (optional): `{ "kind": "user", "id": "<uuid>" }` for a person, with the ID taken from `users_list`. Use `{ "kind": "agent", "id": "<uuid>" }` only when the user gives you a Spaces agent ID. No tool in this skill lists agents. Never guess an ID, and never put a user ID under `kind: "agent"`.
 - `clientRequestId`: generate one per intended task and reuse it if you retry, so a retry does not create a duplicate.
 
 Routing:
 
 - A one-off task with no assignee goes through triage to a suitable agent or person.
-- A recurring task runs with the assignee you set. Without one, it is assigned to the user who created it. Recurring tasks are not triaged automatically.
+- A recurring task runs with the assignee you set. Without one, it goes to the user who created it. Recurring tasks are **not** triaged. So when the user wants someone else to do recurring work ("have someone in finance…"), find that person with `users_list` and set them as `assignee`. If you can't tell who it should be, ask. Don't leave the assignee empty.
+
+Confirm before you create a task. `task_create` is a write: it notifies people, and a recurring task uses credits every time it runs. Show the user the title, the assignee (or "triage" for a one-off), and the schedule in plain words (for example "every Monday at 09:00 Asia/Singapore"). Create the task only after they say yes.
 
 After the call, give the user the task link from the result. Say the task is **queued** or **scheduled**. Never say the work is done.
 
 Examples:
 
-- "Every Monday at 9am Singapore time, have someone in finance send me the AR ageing summary." → `task_create` with `schedule: { cron: "0 9 * * 1", timezone: "Asia/Singapore" }`.
-- "Hand off this vendor onboarding: collect the W-9 and bank details from Acme Ltd." → one-off `task_create`, no assignee.
+- "Every Monday at 9am Singapore time, have someone in finance send me the AR ageing summary." → `users_list` to find the finance person (ask the user if it's unclear), confirm, then `task_create` with `schedule: { cron: "0 9 * * 1", timezone: "Asia/Singapore" }` and `assignee: { kind: "user", id: "<that person's ID>" }`.
+- "Every Friday, remind me to review the payment run." → confirm, then `task_create` with `schedule` and no `assignee`. A recurring task with no assignee goes to the requesting user.
+- "Hand off this vendor onboarding: collect the W-9 and bank details from Acme Ltd." → confirm, then a one-off `task_create` with no assignee, which goes through triage.
 
 ## Answer from the workspace (read-only)
 
@@ -103,9 +105,9 @@ Examples: "Which of my workflows failed last week?", "Show unpaid and overdue bi
 
 ## Safety
 
-- **Confirm before any write.** Before you run a workflow (`workflow_execute`), complete an approval (`task_complete`), call a connected-app tool that changes data (`integration_mcp_tool_call`), or change or delete table data, show the user exactly what you will do and wait for a yes. Completing an approval can resume a workflow that posts entries or releases payments.
+- **Confirm before any write.** Before you create a task (`task_create`), run a workflow (`workflow_execute`), complete an approval (`task_complete`), call a connected-app tool that changes data (`integration_mcp_tool_call`), or change or delete table data, show the user exactly what you will do and wait for a yes.
 - Every Spaces tool is annotated read-only, destructive or open-world. Treat anything not read-only as a write.
-- **No money movement.** Spaces does not transfer money, make payments or trade securities. If asked, say so, and offer to create a task for a person instead. Never claim that a payment or trade happened.
+- **Don't start payments, and don't hide indirect ones.** You must not transfer money, make a payment or trade securities on your own. When asked to ("pay vendor X now", "buy 100 shares"), say you can't, and offer to create a task for a person instead. Spaces actions *can* lead to real money movement, though. Completing an approval can resume a workflow that posts entries or releases a payment. A workflow or a connected accounting, ERP or banking app can create or release payments. Before any of these, tell the user plainly that it may move money, and get an explicit yes. Afterwards, report exactly what the tool returned. Never say that no money moved, or that a payment happened, unless the result says so.
 - Report results exactly as the tools return them, including failures.
 - To disconnect, the user can run `openclaw mcp logout peakflo`, or revoke access in app.peakflo.ai → **Settings → MCP → Connected apps**.
 

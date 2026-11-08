@@ -11,9 +11,15 @@ ClawHub has no MCP-server item type, only skills and code or bundle plugins. Bun
 ## Install (users)
 
 ```bash
-openclaw skills install @<owner>/peakflo-spaces   # <owner> = the ClawHub publisher handle used at publish time; or: clawhub install peakflo-spaces
+# 1. Install the skill. Run this from your OpenClaw workspace; it installs into ./skills.
+clawhub install peakflo-spaces
+#    or, natively: openclaw skills install @OWNER/peakflo-spaces
+#    (replace OWNER with the ClawHub publisher handle shown on the skill page)
+
+# 2. Add the Spaces MCP server and sign in. Stop the Gateway during sign-in.
+#    The ";" makes sure the Gateway starts again even if sign-in fails or is cancelled.
 openclaw mcp add peakflo --url https://api.peakflo.ai/mcp --transport streamable-http --auth oauth
-openclaw gateway stop && openclaw mcp login peakflo && openclaw gateway start
+openclaw gateway stop; openclaw mcp login peakflo; openclaw gateway start
 openclaw mcp doctor peakflo --probe
 ```
 
