@@ -1,5 +1,7 @@
 # OpenClaw / ClawHub
 
+**Live on ClawHub:** https://clawhub.ai/dimavedenyapin/skills/peakflo-spaces (v1.0.0, published from 56bd347).
+
 `peakflo-spaces/` is an [OpenClaw skill](https://docs.openclaw.ai/tools/skills) to publish on [ClawHub](https://clawhub.ai). It tells an OpenClaw agent how to connect the hosted Spaces MCP server (`https://api.peakflo.ai/mcp`, Streamable HTTP and OAuth) and how to use it safely.
 
 Only `SKILL.md` is published. This README stays out of the skill folder so it is not uploaded.
@@ -11,10 +13,10 @@ ClawHub has no MCP-server item type, only skills and code or bundle plugins. Bun
 ## Install (users)
 
 ```bash
-# 1. Install the skill. Run this from your OpenClaw workspace; it installs into ./skills.
-clawhub install peakflo-spaces
-#    or, natively: openclaw skills install @OWNER/peakflo-spaces
-#    (replace OWNER with the ClawHub publisher handle shown on the skill page)
+# 1. Install the skill from ClawHub.
+openclaw skills install @dimavedenyapin/peakflo-spaces
+#    or, with the ClawHub CLI from your OpenClaw workspace (installs into ./skills):
+#    clawhub install peakflo-spaces
 
 # 2. Add the Spaces MCP server and sign in. Stop the Gateway during sign-in.
 #    The ";" makes sure the Gateway starts again even if sign-in fails or is cancelled.
