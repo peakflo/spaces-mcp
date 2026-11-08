@@ -22,6 +22,7 @@ This repository contains no server code. It only holds the connection configs fo
 | Gemini CLI | `gemini extensions install https://github.com/peakflo/spaces-mcp` |
 | Cursor | Install the plugin from this repo, or add [`mcp.json`](mcp.json) to `~/.cursor/mcp.json` |
 | VS Code | `code --add-mcp '{"name":"peakflo","type":"http","url":"https://api.peakflo.ai/mcp"}'` |
+| OpenClaw | `openclaw mcp add peakflo --url https://api.peakflo.ai/mcp --transport streamable-http --auth oauth`, then `openclaw mcp login peakflo`. Skill: [`openclaw/peakflo-spaces`](openclaw/peakflo-spaces/SKILL.md) |
 | Other | Any MCP client that supports Streamable HTTP and OAuth: use the URL above |
 
 The first time you connect, a browser window opens. Sign up or sign in, pick your workspace and click **Allow access**.
