@@ -1,6 +1,6 @@
 # OpenClaw / ClawHub
 
-**Live on ClawHub:** https://clawhub.ai/dimavedenyapin/skills/peakflo-spaces (v1.0.0, published from 56bd347).
+**Live on ClawHub:** https://clawhub.ai/peakflo/skills/peakflo-spaces (published by @peakflo; v1.0.1 has the same content as 1.0.0 from 56bd347).
 
 `peakflo-spaces/` is an [OpenClaw skill](https://docs.openclaw.ai/tools/skills) to publish on [ClawHub](https://clawhub.ai). It tells an OpenClaw agent how to connect the hosted Spaces MCP server (`https://api.peakflo.ai/mcp`, Streamable HTTP and OAuth) and how to use it safely.
 
@@ -14,7 +14,7 @@ ClawHub has no MCP-server item type, only skills and code or bundle plugins. Bun
 
 ```bash
 # 1. Install the skill from ClawHub.
-openclaw skills install @dimavedenyapin/peakflo-spaces
+openclaw skills install @peakflo/peakflo-spaces
 #    or, with the ClawHub CLI from your OpenClaw workspace (installs into ./skills):
 #    clawhub install peakflo-spaces
 
@@ -45,7 +45,7 @@ clawhub skill publish ./openclaw/peakflo-spaces \
   --source-commit "$(git rev-parse HEAD)" \
   --source-path openclaw/peakflo-spaces
 
-# add --owner <org-handle> to publish under a ClawHub publisher org instead of your user
+# the skill is owned by the @peakflo publisher: always pass --owner peakflo
 # afterwards:
 clawhub inspect peakflo-spaces
 clawhub skill verify peakflo-spaces
