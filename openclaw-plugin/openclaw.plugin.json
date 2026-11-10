@@ -1,0 +1,16 @@
+{
+  "id": "peakflo-spaces",
+  "name": "Spaces by Peakflo",
+  "version": "1.0.0",
+  "description": "Hand off one-off or recurring finance and ops work to cloud agents or people, and query your Spaces workflows, data tables, reports, policy documents and approvals.",
+  "categories": ["finance-payments"],
+  "configSchema": { "type": "object", "additionalProperties": false, "properties": {} },
+  "mcpServers": {
+    "peakflo": {
+      "url": "https://api.peakflo.ai/mcp",
+      "transport": "streamable-http",
+      "auth": "oauth",
+      "description": "Sign in with your Spaces account in the browser (OAuth). No API keys."
+    }
+  }
+}
