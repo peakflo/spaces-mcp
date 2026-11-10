@@ -95,6 +95,7 @@ Look up the answer before you reply. Don't answer from memory.
 | Policies and reference documents | `datastore_list` → `datastore_query` |
 | Pending approvals and human tasks | `task_list` |
 | Connected apps (accounting, ERP, email) | `integrations_list` → `integration_mcp_tools_list` |
+| Report a problem with Spaces itself | `feedback_submit` (ask the user first; never include secrets or unnecessary personal data) |
 
 - If a report returns no rows, check the data tables (`table_list`) before you say there is no data.
 - An empty result is a valid answer. Report it as empty.
