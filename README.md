@@ -42,7 +42,7 @@ The first time you connect, a browser window opens. Sign up or sign in, pick you
 | `datastore_list`, `datastore_query` | Search Business Context documents | read-only |
 | `integrations_list`, `integration_mcp_tool_call` | Use connected apps (accounting, ERP, email) | read-only / write |
 | `task_list`, `task_complete` | Approvals and human tasks | read-only / write |
-| `feedback_submit` | Report a problem with Spaces (a tool error, a wrong result, a missing capability or unclear docs) to the Peakflo team. Secrets and email addresses are removed before sending. | write |
+| `feedback_submit` | Report a problem with Spaces (a tool error, a wrong result, a missing capability or unclear docs) to the Peakflo team. Your assistant asks you first. Secrets are removed, and the report doesn't include your email. | write |
 
 Every tool has a title and read-only, destructive and open-world hints, so your assistant can ask before it changes anything. The tools you see follow your workspace role and permissions.
 

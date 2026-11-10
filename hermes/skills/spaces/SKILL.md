@@ -35,7 +35,7 @@ read-only / destructive hints; read them. This skill is the operating logic on t
 | Bills, invoices, vendors, customers, payments | `report_schema`, `report_schema_detail`, `report_query` |
 | Policies and other reference documents | `datastore_list`, `datastore_query` |
 | Connected apps (accounting, ERP, email) | `integrations_list`, `integration_mcp_tools_list`, `integration_mcp_tool_call` |
-| Report a problem with Spaces itself | `feedback_submit` (ask the user first; never include secrets or unnecessary personal data) |
+| Report a problem with Spaces itself | `feedback_submit`: offer it when a Spaces tool keeps failing, and send only after the user agrees. Never include secrets or personal data. |
 
 ## Rules
 
