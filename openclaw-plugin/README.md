@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/peakflo/spaces-mcp/main/assets/logo-512.png" width="96" height="96" alt="Spaces by Peakflo logo"></p>
+
 # Spaces by Peakflo: OpenClaw plugin
 
 Adds the hosted Spaces by Peakflo MCP server to OpenClaw:

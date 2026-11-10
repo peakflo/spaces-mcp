@@ -1,8 +1,19 @@
 {
   "name": "@peakflo/spaces",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Spaces by Peakflo for OpenClaw: adds the hosted Spaces MCP server (Streamable HTTP, OAuth sign-in) to hand off finance and ops work and query workflows, data tables, reports, policy documents and approvals.",
+  "keywords": [
+    "accounting",
+    "accounts-payable",
+    "accounts-receivable",
+    "approvals",
+    "mcp",
+    "finance",
+    "workflows",
+    "ai-agents",
+    "peakflo"
+  ],
   "license": "MIT",
   "author": "Peakflo Pte. Ltd.",
   "homepage": "https://spaces.peakflo.ai/docs/mcp/",
